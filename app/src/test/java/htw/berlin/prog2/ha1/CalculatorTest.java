@@ -108,8 +108,45 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+// RED Test 1
 
+    @Test
+    @DisplayName("should display result after adding a decimal number with a number")
+    void testDecimalAddition() {
+        Calculator calc = new Calculator();
 
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "4.3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+//RED Test 2
+
+        @Test
+        @DisplayName("should display error when adding dot to a decimal number")
+        void testDecimalAddition () {
+            Calculator calc = new Calculator();
+
+            calc.pressDigitKey(3);
+            calc.pressDotKey();
+            calc.pressDigitKey(4);
+            calc.pressDotKey();
+            calc.pressDigitKey(5);
+            calc.pressEqualsKey();
+
+            String expected = "Error";
+            String actual = calc.readScreen();
+
+            assertEquals(expected, actual);
+
+        }
+    }
 }
 
 

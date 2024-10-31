@@ -34,7 +34,6 @@ public class Calculator {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
         screen = screen + digit;
     }
 
@@ -133,3 +132,4 @@ public class Calculator {
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 }
+// Branch Test
