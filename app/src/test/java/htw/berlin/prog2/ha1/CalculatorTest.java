@@ -90,7 +90,28 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+//Positive Multiplikation mit zwei zweistelligen Zahlen
+    @Test
+    @DisplayName("should display result after multiplying two positive multi-digit numbers")
+    void testPositiveMultiplication() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        String expected = "270";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 }
+
+
 
 //Test
 
