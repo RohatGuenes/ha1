@@ -109,7 +109,8 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
-// RED Test 1
+
+    // RED Test 1  // Fixed
     @Test
     @DisplayName("Pressing DotKey and then a number should put the number after the dot")
     void testDecimalAddition() {
@@ -124,5 +125,26 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    // RED Test 2
+    @Test
+    @DisplayName("Should give out the result with no unnecessary 0 at end of decimal number")
+    void testDecimalFormat() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressDotKey();
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressDotKey();
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "19.36";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
+
 

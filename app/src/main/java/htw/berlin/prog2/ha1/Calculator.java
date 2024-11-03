@@ -25,7 +25,7 @@ public class Calculator {
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
-     * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
+     * oder rechts an die zuvor gedrückte Ziffer oder den zuvor gedrückten Punkt angehängt angezeigt wird.
      *
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
@@ -66,6 +66,7 @@ public class Calculator {
         latestOperation = operation;
     }
 
+
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
@@ -95,6 +96,7 @@ public class Calculator {
      * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
+     * Falls kein Wert vor dem "." eingegeben wurde/screen = 0 ist, wird der Punkt an die Null rangehängt.
      */
     public void pressDotKey() {
         if (screen.equals("0")) screen = "0.";
@@ -124,6 +126,7 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+
         var result = switch (latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
@@ -135,5 +138,9 @@ public class Calculator {
         if (screen.equals("Infinity")) screen = "Error";
         if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
+
     }
+
 }
