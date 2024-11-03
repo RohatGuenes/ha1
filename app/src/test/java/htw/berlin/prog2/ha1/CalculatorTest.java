@@ -125,7 +125,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    // RED Test 2
+    // RED Test 2 // Fixed
     @Test
     @DisplayName("Should give out the result with no unnecessary 0 at end of decimal number")
     void testDecimalFormat() {

@@ -118,7 +118,7 @@ public class Calculator {
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
-     * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
+     * Wurde zuvor keine Operationstaste gedrückt - werden, falls vorhanden, unnötige Nullen oder Punkte gekürzt
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
      * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
@@ -126,21 +126,49 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        // Wenn kein Operator vorhanden ist wird die Zahl gekürzt/Format angepasst
+        if (latestOperation.isEmpty()) {
 
-        var result = switch (latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
-        if (screen.equals("Infinity")) screen = "Error";
-        if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
-        if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            // 4.0 zB wird zu 4
+            if (screen.endsWith(".0"))
+                screen = screen.substring(0, screen.length() - 2);
 
 
+            // Wenn Dezimalzahl mit 0 endet, werden die Nullen entfernt
+            if (screen.contains("."))
+                while (screen.endsWith("0"))
+                    screen = screen.substring(0, screen.length() - 1);
 
-    }
+            // 4. wird zu 4
+            if (screen.endsWith("."))
+                    screen = screen.substring(0, screen.length() - 1);
 
-}
+             // Länge Check
+            if (screen.length() > 11)
+                screen = screen.substring(0, 11);
+
+
+            return;
+        }
+                    //Falls ein Operator vorhanden ist
+                    var result = switch (latestOperation) {
+                        case "+" -> latestValue + Double.parseDouble(screen);
+                        case "-" -> latestValue - Double.parseDouble(screen);
+                        case "x" -> latestValue * Double.parseDouble(screen);
+                        case "/" -> latestValue / Double.parseDouble(screen);
+                        default -> throw new IllegalArgumentException();
+                    };
+                    screen = Double.toString(result);
+                    if (screen.equals("Infinity")) screen = "Error";
+                    if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+                    if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
+                }
+        }
+
+
+
+
+
+
