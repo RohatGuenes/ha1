@@ -109,9 +109,20 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+// RED Test 1
+    @Test
+    @DisplayName("Pressing DotKey and then a number should put the number after the dot")
+    void testDecimalAddition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+
+        String expected = "0.3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
-
-
-
-//Test
 
